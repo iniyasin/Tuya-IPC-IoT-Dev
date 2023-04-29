@@ -43,14 +43,14 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Enables login to the app with the email address and password.
                 ThingHomeSdk.getUserInstance().loginWithEmail("62",
-//                        emailEdt.getText().toString(),
-//                        passwordEdt.getText().toString(),
-                        "iniyasin7@gmail.com",
-                        "Yasin12345",
+                        emailEdt.getText().toString(),
+                        passwordEdt.getText().toString(),
+//                        "iniyasin7@gmail.com",
+//                        "Yasin12345!",
                         new ILoginCallback() {
                     @Override
                     public void onSuccess(User user) {
-                        Toast.makeText(context, "Logged in with Username: ", Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, "Logged in with Username: " + user.getUsername(), Toast.LENGTH_LONG).show();
                     }
 
                     @Override
@@ -89,37 +89,6 @@ public class LoginActivity extends AppCompatActivity {
 //                    }
 //                });
 
-            }
-        });
-    }
-
-    void sendVerification(Context context) {
-        // Returns a verification code to an email address.
-        ThingHomeSdk.getUserInstance().sendVerifyCodeWithUserName("iniyasin7@gmail.com", "", "62", 1, new IResultCallback() {
-            @Override
-            public void onError(String code, String error) {
-                Toast.makeText(context, "code: " + code + "error:" + error, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onSuccess() {
-                Toast.makeText(context, "Verification code returned successfully.", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
-
-    void registerEmail(Context context) {
-
-        // Registers an account with an email address and a password.
-        ThingHomeSdk.getUserInstance().registerAccountWithEmail("62", "iniyasin7@gmail.com","123456","5723", new IRegisterCallback() {
-            @Override
-            public void onSuccess(User user) {
-                Toast.makeText(context, "Registered successfully.", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onError(String code, String error) {
-                Toast.makeText(context, "code: " + code + "error:" + error, Toast.LENGTH_SHORT).show();
             }
         });
     }

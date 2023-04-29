@@ -2,11 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.kelompokberdua.iotipcdev">
-
     <!-- sdcard -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <!-- Network -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- Network -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -14,7 +12,6 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
-
 
     <application
         android:name=".BaseApplication"
@@ -25,20 +22,11 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/Theme.TuyaIPCDev"
-        tools:targetApi="31"
-        tools:replace="android:allowBackup">
-
-        <meta-data
-            android:name="THING_SMART_APPKEY"
-            android:value="9qwhgqgqduqwxprgeaya" />
-        <meta-data
-            android:name="THING_SMART_SECRET"
-            android:value="4afmvwj95kphj57wvkafh3rh7fyv5su3" />
-
+        tools:replace="android:allowBackup"
+        tools:targetApi="31">
         <activity
-            android:name=".LoginActivity"
-            android:exported="true"
-            android:label="@string/app_name">
+            android:name=".DashbaordActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -46,11 +34,26 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".RegisterActivity"
+            android:exported="false" />
+
+        <meta-data
+            android:name="THING_SMART_APPKEY"
+            android:value="${TUYA_SMART_APPKEY}" />
+        <meta-data
+            android:name="THING_SMART_SECRET"
+            android:value="${TUYA_SMART_SECRET}" />
+
+        <activity
+            android:name=".LoginActivity"
+            android:exported="true"
+            android:label="@string/app_name">
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:exported="false"
             android:label="@string/app_name"
-            android:theme="@style/Theme.TuyaIPCDev" >
-        </activity>
+            android:theme="@style/Theme.TuyaIPCDev" />
     </application>
 
 </manifest>
