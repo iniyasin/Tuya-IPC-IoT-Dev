@@ -5,6 +5,7 @@
     <!-- sdcard -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- Network -->
+    <uses-permission android:name="android.permission.CAMERA" /> <!-- Network -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
@@ -24,6 +25,15 @@
         android:theme="@style/Theme.TuyaIPCDev"
         tools:replace="android:allowBackup"
         tools:targetApi="31">
+        <activity
+            android:name=".devicepairing.CreateQrCodeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".devicepairing.ScanQrCodeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".homemanagement.HomeDetailActivity"
+            android:exported="false" />
         <activity
             android:name=".homemanagement.HomeAddNewActivity"
             android:exported="false" />
