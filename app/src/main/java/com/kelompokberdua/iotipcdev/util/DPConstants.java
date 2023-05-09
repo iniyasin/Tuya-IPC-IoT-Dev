@@ -1,4 +1,4 @@
-package com.kelompokberdua.iotipcdev;
+package com.kelompokberdua.iotipcdev.util;
 
 public class DPConstants {
     public static final String PTZ_CONTROL = "119";

@@ -1,4 +1,4 @@
-package com.kelompokberdua.iotipcdev;
+package com.kelompokberdua.iotipcdev.feature;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -11,18 +11,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.kelompokberdua.iotipcdev.R;
+import com.kelompokberdua.iotipcdev.data.Preferences;
 import com.kelompokberdua.iotipcdev.homemanagement.HomeManagementActivity;
-import com.thingclips.smart.android.user.api.IBooleanCallback;
 import com.thingclips.smart.android.user.api.ILoginCallback;
-import com.thingclips.smart.android.user.api.IRegisterCallback;
 import com.thingclips.smart.android.user.bean.User;
 import com.thingclips.smart.home.sdk.ThingHomeSdk;
-import com.thingclips.smart.home.sdk.bean.HomeBean;
-import com.thingclips.smart.home.sdk.callback.IThingHomeResultCallback;
-import com.thingclips.smart.sdk.api.IResultCallback;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class LoginActivity extends AppCompatActivity {
     EditText emailEdt;
@@ -53,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(User user) {
                         Toast.makeText(context, "Logged in with Username: " + user.getUsername(), Toast.LENGTH_LONG).show();
+                        Preferences.setIsLoggedUser(context, true);
                         Intent intent = new Intent(LoginActivity.this, HomeManagementActivity.class);
                         startActivity(intent);
                     }
@@ -63,36 +58,6 @@ public class LoginActivity extends AppCompatActivity {
                         Log.d("code: " + code, "error:" + error);
                     }
                 });
-//                List<String> rooms = new ArrayList<String>();
-//                rooms.add("Rooms 1");
-//                ThingHomeSdk.getHomeManagerInstance().createHome("Home test", -6.146446786441359, 105.85596507124647, "Rokan", rooms, new IThingHomeResultCallback() {
-//                    @Override
-//                    public void onSuccess(HomeBean bean) {
-//                        Toast.makeText(context, "Added Home Success", Toast.LENGTH_LONG).show();
-//                        Log.d("Home: ", bean.getName());
-//                    }
-//                    @Override
-//                    public void onError(String errorCode, String errorMsg) {
-//                        Toast.makeText(context, "code: " + errorCode + "error:" + errorMsg, Toast.LENGTH_LONG).show();
-//                    }
-//                });
-
-//                sendVerification(context);
-//                registerEmail(context);
-//                ThingHomeSdk.getUserInstance().touristBindWithUserName("86", "yasin","20", "yasin", new IBooleanCallback() {
-//
-//                    @Override
-//                    public void onSuccess() {
-//                        Toast.makeText(context, "Logged in with Username: ", Toast.LENGTH_LONG).show();
-//                    }
-//
-//                    @Override
-//                    public void onError(String code, String error) {
-//                        Toast.makeText(context, "code: " + code + "error:" + error, Toast.LENGTH_LONG).show();
-//                        Log.d("code: " + code, "error:" + error);
-//                    }
-//                });
-
             }
         });
     }

@@ -1,20 +1,19 @@
 package com.kelompokberdua.iotipcdev.devicemanagement;
 
-import static com.kelompokberdua.iotipcdev.Constant.ARG1_OPERATE_FAIL;
-import static com.kelompokberdua.iotipcdev.Constant.ARG1_OPERATE_SUCCESS;
-import static com.kelompokberdua.iotipcdev.Constant.INTENT_DEV_ID;
-import static com.kelompokberdua.iotipcdev.Constant.MSG_CONNECT;
-import static com.kelompokberdua.iotipcdev.Constant.MSG_GET_VIDEO_CLARITY;
-import static com.kelompokberdua.iotipcdev.Constant.MSG_MUTE;
-import static com.kelompokberdua.iotipcdev.Constant.MSG_SCREENSHOT;
-import static com.kelompokberdua.iotipcdev.Constant.MSG_SET_CLARITY;
-import static com.kelompokberdua.iotipcdev.Constant.MSG_TALK_BACK_BEGIN;
-import static com.kelompokberdua.iotipcdev.Constant.MSG_TALK_BACK_OVER;
-import static com.kelompokberdua.iotipcdev.Constant.MSG_VIDEO_RECORD_BEGIN;
-import static com.kelompokberdua.iotipcdev.Constant.MSG_VIDEO_RECORD_FAIL;
-import static com.kelompokberdua.iotipcdev.Constant.MSG_VIDEO_RECORD_OVER;
+import static com.kelompokberdua.iotipcdev.util.Constant.ARG1_OPERATE_FAIL;
+import static com.kelompokberdua.iotipcdev.util.Constant.ARG1_OPERATE_SUCCESS;
+import static com.kelompokberdua.iotipcdev.util.Constant.INTENT_DEV_ID;
+import static com.kelompokberdua.iotipcdev.util.Constant.MSG_CONNECT;
+import static com.kelompokberdua.iotipcdev.util.Constant.MSG_GET_VIDEO_CLARITY;
+import static com.kelompokberdua.iotipcdev.util.Constant.MSG_MUTE;
+import static com.kelompokberdua.iotipcdev.util.Constant.MSG_SCREENSHOT;
+import static com.kelompokberdua.iotipcdev.util.Constant.MSG_SET_CLARITY;
+import static com.kelompokberdua.iotipcdev.util.Constant.MSG_TALK_BACK_BEGIN;
+import static com.kelompokberdua.iotipcdev.util.Constant.MSG_TALK_BACK_OVER;
+import static com.kelompokberdua.iotipcdev.util.Constant.MSG_VIDEO_RECORD_BEGIN;
+import static com.kelompokberdua.iotipcdev.util.Constant.MSG_VIDEO_RECORD_FAIL;
+import static com.kelompokberdua.iotipcdev.util.Constant.MSG_VIDEO_RECORD_OVER;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -33,12 +32,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
-import com.kelompokberdua.iotipcdev.CameraPTZHelper;
-import com.kelompokberdua.iotipcdev.Constant;
-import com.kelompokberdua.iotipcdev.DPConstants;
-import com.kelompokberdua.iotipcdev.MessageUtil;
+import com.kelompokberdua.iotipcdev.util.CameraPTZHelper;
+import com.kelompokberdua.iotipcdev.util.Constant;
+import com.kelompokberdua.iotipcdev.util.DPConstants;
+import com.kelompokberdua.iotipcdev.util.MessageUtil;
 import com.kelompokberdua.iotipcdev.R;
-import com.kelompokberdua.iotipcdev.ToastUtil;
+import com.kelompokberdua.iotipcdev.util.ToastUtil;
 import com.kelompokberdua.iotipcdev.feature.CameraCloudStorageActivity;
 import com.thingclips.smart.android.camera.sdk.ThingIPCSdk;
 import com.thingclips.smart.android.camera.sdk.api.IThingIPCCloud;

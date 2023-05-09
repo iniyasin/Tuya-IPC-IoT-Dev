@@ -53,7 +53,7 @@
             android:name=".homemanagement.HomeManagementActivity"
             android:exported="false" />
         <activity
-            android:name=".DashbaordActivity"
+            android:name=".feature.DashboardActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -62,7 +62,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".RegisterActivity"
+            android:name=".feature.RegisterActivity"
             android:exported="false" />
 
         <meta-data
@@ -73,7 +73,7 @@
             android:value="${TUYA_SMART_SECRET}" />
 
         <activity
-            android:name=".LoginActivity"
+            android:name=".feature.LoginActivity"
             android:exported="true"
             android:label="@string/app_name" />
         <activity

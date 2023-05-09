@@ -1,4 +1,4 @@
-package com.kelompokberdua.iotipcdev;
+package com.kelompokberdua.iotipcdev.util;
 
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
+import com.kelompokberdua.iotipcdev.R;
 import com.thingclips.drawee.view.DecryptImageView;
 import com.thingclips.smart.android.camera.sdk.ThingIPCSdk;
 import com.thingclips.smart.android.camera.sdk.api.IThingIPCPTZ;

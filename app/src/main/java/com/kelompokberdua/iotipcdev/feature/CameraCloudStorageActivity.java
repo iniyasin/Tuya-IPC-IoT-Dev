@@ -1,6 +1,6 @@
 package com.kelompokberdua.iotipcdev.feature;
 
-import static com.kelompokberdua.iotipcdev.Constant.INTENT_DEV_ID;
+import static com.kelompokberdua.iotipcdev.util.Constant.INTENT_DEV_ID;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -16,10 +16,10 @@ import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.kelompokberdua.iotipcdev.Constant;
-import com.kelompokberdua.iotipcdev.IPCSavePathUtils;
+import com.kelompokberdua.iotipcdev.util.Constant;
+import com.kelompokberdua.iotipcdev.util.IPCSavePathUtils;
 import com.kelompokberdua.iotipcdev.R;
-import com.kelompokberdua.iotipcdev.ToastUtil;
+import com.kelompokberdua.iotipcdev.util.ToastUtil;
 import com.kelompokberdua.iotipcdev.adapter.CameraCloudVideoDateAdapter;
 import com.kelompokberdua.iotipcdev.adapter.CameraVideoTimerAdapter;
 import com.thingclips.smart.android.camera.sdk.ThingIPCSdk;

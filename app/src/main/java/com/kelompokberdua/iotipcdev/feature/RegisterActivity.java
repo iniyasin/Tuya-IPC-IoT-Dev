@@ -1,4 +1,4 @@
-package com.kelompokberdua.iotipcdev;
+package com.kelompokberdua.iotipcdev.feature;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.kelompokberdua.iotipcdev.R;
+import com.kelompokberdua.iotipcdev.data.Preferences;
 import com.thingclips.smart.android.user.api.IRegisterCallback;
 import com.thingclips.smart.android.user.bean.User;
 import com.thingclips.smart.home.sdk.ThingHomeSdk;
@@ -77,6 +79,7 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onSuccess(User user) {
                 Toast.makeText(context, "Registered successfully.", Toast.LENGTH_SHORT).show();
+//                Preferences.setIsLoggedUser(context, true);
                 Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                 startActivity(intent);
             }

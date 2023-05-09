@@ -1,6 +1,6 @@
-package com.kelompokberdua.iotipcdev;
+package com.kelompokberdua.iotipcdev.util;
 
-import static com.kelompokberdua.iotipcdev.Constant.INTENT_DEV_ID;
+import static com.kelompokberdua.iotipcdev.util.Constant.INTENT_DEV_ID;
 
 import android.app.Application;
 import android.content.Context;

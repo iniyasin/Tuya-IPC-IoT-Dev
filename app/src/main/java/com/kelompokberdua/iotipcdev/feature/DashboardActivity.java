@@ -1,4 +1,4 @@
-package com.kelompokberdua.iotipcdev;
+package com.kelompokberdua.iotipcdev.feature;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,14 +7,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class DashbaordActivity extends AppCompatActivity {
+import com.kelompokberdua.iotipcdev.R;
+import com.kelompokberdua.iotipcdev.data.Preferences;
+import com.kelompokberdua.iotipcdev.homemanagement.HomeManagementActivity;
+
+public class DashboardActivity extends AppCompatActivity {
     Button btnLogin;
     Button btnRegister;
+    boolean isLogged;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashbaord);
+        setContentView(R.layout.activity_dashboard);
 
         btnLogin = findViewById(R.id.id_login);
         btnRegister = findViewById(R.id.id_register);
@@ -22,7 +27,7 @@ public class DashbaordActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(DashbaordActivity.this, LoginActivity.class);
+                Intent intent = new Intent(DashboardActivity.this, LoginActivity.class);
                 startActivity(intent);
             }
         });
@@ -30,9 +35,16 @@ public class DashbaordActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(DashbaordActivity.this, RegisterActivity.class);
+                Intent intent = new Intent(DashboardActivity.this, RegisterActivity.class);
                 startActivity(intent);
             }
         });
+
+        isLogged = Preferences.getKeyLoginStatus(getBaseContext());
+
+        if (isLogged) {
+            Intent intent = new Intent(DashboardActivity.this, HomeManagementActivity.class);
+            startActivity(intent);
+        }
     }
 }

@@ -1,6 +1,6 @@
 package com.kelompokberdua.iotipcdev.adapter;
 
-import static com.kelompokberdua.iotipcdev.Constant.INTENT_DEV_ID;
+import static com.kelompokberdua.iotipcdev.util.Constant.INTENT_DEV_ID;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -8,12 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.kelompokberdua.iotipcdev.R;
 import com.kelompokberdua.iotipcdev.devicemanagement.DeviceDetail;
-import com.kelompokberdua.iotipcdev.homemanagement.HomeDetailActivity;
 import com.thingclips.smart.sdk.bean.DeviceBean;
 
 import java.util.ArrayList;

@@ -2,6 +2,7 @@ package com.kelompokberdua.iotipcdev;
 
 import android.app.Application;
 
+import com.kelompokberdua.iotipcdev.util.CameraUtils;
 import com.thingclips.smart.home.sdk.ThingHomeSdk;
 import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 

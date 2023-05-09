@@ -1,9 +1,6 @@
-package com.kelompokberdua.iotipcdev;
-
-import static com.kelompokberdua.iotipcdev.Constant.INTENT_MSGID;
+package com.kelompokberdua.iotipcdev.util;
 
 import android.app.Application;
-import android.content.Intent;
 
 import com.thingclips.smart.android.camera.sdk.ThingIPCSdk;
 import com.thingclips.smart.android.camera.sdk.api.IThingIPCDoorBellManager;

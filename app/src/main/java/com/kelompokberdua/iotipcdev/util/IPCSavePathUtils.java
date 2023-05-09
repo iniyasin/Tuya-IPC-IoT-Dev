@@ -1,4 +1,4 @@
-package com.kelompokberdua.iotipcdev;
+package com.kelompokberdua.iotipcdev.util;
 
 import android.content.Context;
 import android.os.Build;
