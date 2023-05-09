@@ -1,15 +1,19 @@
 package com.kelompokberdua.iotipcdev.homemanagement;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.kelompokberdua.iotipcdev.R;
+import com.kelompokberdua.iotipcdev.adapter.DeviceListAdapter;
 import com.kelompokberdua.iotipcdev.devicepairing.CreateQrCodeActivity;
 import com.kelompokberdua.iotipcdev.devicepairing.ScanQrCodeActivity;
 import com.thingclips.smart.home.sdk.ThingHomeSdk;
@@ -17,10 +21,17 @@ import com.thingclips.smart.home.sdk.bean.HomeBean;
 import com.thingclips.smart.home.sdk.bean.WeatherBean;
 import com.thingclips.smart.home.sdk.callback.IIGetHomeWetherSketchCallBack;
 import com.thingclips.smart.home.sdk.callback.IThingHomeResultCallback;
+import com.thingclips.smart.sdk.bean.DeviceBean;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class HomeDetailActivity extends AppCompatActivity implements View.OnClickListener{
     TextView idHome, idHomeName, idHomeCity, idHomeWeather, idHomeTemperature;
     Button btnScanQrCode, btnCreateQrCode;
+    RecyclerView deviceListView;
+
+    DeviceListAdapter deviceListAdapter;
     private long mHomeId;
 
 
@@ -34,6 +45,8 @@ public class HomeDetailActivity extends AppCompatActivity implements View.OnClic
         idHomeCity = findViewById(R.id.id_home_city);
         idHomeWeather = findViewById(R.id.id_home_weather);
         idHomeTemperature = findViewById(R.id.id_home_temperature);
+
+        deviceListView = findViewById(R.id.id_device_listview);
 
         btnScanQrCode = findViewById(R.id.btn_scan_qr_code);
         btnCreateQrCode = findViewById(R.id.btn_create_qr_code);
@@ -53,6 +66,8 @@ public class HomeDetailActivity extends AppCompatActivity implements View.OnClic
                 idHome.setText(String.valueOf(bean.getHomeId()));
                 idHomeName.setText(bean.getName());
                 idHomeCity.setText(bean.getGeoName());
+
+                initListView(bean.getDeviceList());
 
                 // Get home weather info
                 ThingHomeSdk.newHomeInstance(mHomeId).getHomeWeatherSketch(bean.getLon(),
@@ -84,6 +99,19 @@ public class HomeDetailActivity extends AppCompatActivity implements View.OnClic
                 ).show();
             }
         });
+    }
+
+    void initListView(List<DeviceBean> deviceBeans) {
+        if (deviceBeans != null && !deviceBeans.isEmpty()) {
+            deviceListView.setVisibility(View.VISIBLE);
+
+            deviceListAdapter = new DeviceListAdapter();
+            deviceListView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+            deviceListView.setAdapter(deviceListAdapter);
+
+            deviceListAdapter.data = (ArrayList<DeviceBean>) deviceBeans;
+            deviceListAdapter.notifyDataSetChanged();
+        }
     }
 
     @Override

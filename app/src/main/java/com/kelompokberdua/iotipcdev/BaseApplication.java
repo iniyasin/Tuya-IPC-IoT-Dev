@@ -13,5 +13,6 @@ public class BaseApplication extends Application {
         ThingHomeSdk.init(this, "9qwhgqgqduqwxprgeaya", "4afmvwj95kphj57wvkafh3rh7fyv5su3");
         ThingHomeSdk.setDebugMode(true);
         ZXingLibrary.initDisplayOpinion(this);
+        CameraUtils.init(this);
     }
 }

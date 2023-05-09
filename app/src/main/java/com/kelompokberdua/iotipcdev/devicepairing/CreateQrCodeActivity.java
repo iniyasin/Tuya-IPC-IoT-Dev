@@ -4,6 +4,7 @@ import static android.graphics.Color.BLACK;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
@@ -19,6 +20,7 @@ import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.WriterException;
 import com.google.zxing.common.BitMatrix;
 import com.kelompokberdua.iotipcdev.R;
+import com.kelompokberdua.iotipcdev.devicemanagement.DevicePairingProcessActivity;
 import com.thingclips.smart.home.sdk.ThingHomeSdk;
 import com.thingclips.smart.home.sdk.builder.ThingCameraActivatorBuilder;
 import com.thingclips.smart.sdk.api.IThingActivatorGetToken;
@@ -29,11 +31,12 @@ import com.thingclips.smart.sdk.bean.DeviceBean;
 import java.util.Hashtable;
 
 public class CreateQrCodeActivity extends AppCompatActivity implements View.OnClickListener {
-    LinearLayout layoutInput;
+    LinearLayout layoutInput, layoutResult;
     EditText wifiSsidEdt, passwordSsidEdt;
-    Button btnGenerateQr;
+    Button btnGenerateQr, btnNextStep;
     ImageView imgQrCode;
     private long mHomeId;
+    String tokenPairing;
     private IThingCameraDevActivator mThingActivator;
 
     @Override
@@ -47,9 +50,12 @@ public class CreateQrCodeActivity extends AppCompatActivity implements View.OnCl
         wifiSsidEdt = findViewById(R.id.id_wifi_ssid);
         passwordSsidEdt = findViewById(R.id.id_password_ssid);
         btnGenerateQr = findViewById(R.id.btn_generate_qr_code);
+        btnNextStep = findViewById(R.id.btn_next_step);
+        layoutResult = findViewById(R.id.layout_result);
         imgQrCode = findViewById(R.id.iv_qrcode);
 
         btnGenerateQr.setOnClickListener(this);
+        btnNextStep.setOnClickListener(this);
     }
 
     @Override
@@ -57,9 +63,9 @@ public class CreateQrCodeActivity extends AppCompatActivity implements View.OnCl
         if (view.getId() == R.id.btn_generate_qr_code) {
             ThingHomeSdk.getActivatorInstance().getActivatorToken(mHomeId,
                     new IThingActivatorGetToken() {
-
                         @Override
                         public void onSuccess(String token) {
+                            tokenPairing = token;
                             ThingCameraActivatorBuilder builder = new ThingCameraActivatorBuilder()
                                     .setContext(getBaseContext())
                                     .setSsid(wifiSsidEdt.getText().toString())
@@ -78,6 +84,8 @@ public class CreateQrCodeActivity extends AppCompatActivity implements View.OnCl
                                                         imgQrCode.setImageBitmap(bitmap);
                                                         layoutInput.setVisibility(View.GONE);
                                                         imgQrCode.setVisibility(View.VISIBLE);
+                                                        btnGenerateQr.setVisibility(View.GONE);
+                                                        layoutResult.setVisibility(View.VISIBLE);
                                                     }
                                                 });
                                             } catch (WriterException e) {
@@ -101,7 +109,7 @@ public class CreateQrCodeActivity extends AppCompatActivity implements View.OnCl
                                     });
                             mThingActivator = ThingHomeSdk.getActivatorInstance().newCameraDevActivator(builder);
                             mThingActivator.createQRCode();
-                            mThingActivator.start();
+//                            mThingActivator.start();
                         }
 
                         @Override
@@ -113,6 +121,12 @@ public class CreateQrCodeActivity extends AppCompatActivity implements View.OnCl
                             ).show();
                         }
                     });
+        } else if (view.getId() == R.id.btn_next_step) {
+            Intent intent = new Intent(CreateQrCodeActivity.this, DevicePairingProcessActivity.class);
+            intent.putExtra("tokenPairing", tokenPairing);
+            intent.putExtra("wifiSsid", wifiSsidEdt.getText().toString());
+            intent.putExtra("passwordSsid", passwordSsidEdt.getText().toString());
+            startActivity(intent);
         }
     }
 
@@ -147,4 +161,12 @@ public class CreateQrCodeActivity extends AppCompatActivity implements View.OnCl
         return bitmap;
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (null != mThingActivator) {
+            mThingActivator.stop();
+            mThingActivator.onDestroy();
+        }
+    }
 }

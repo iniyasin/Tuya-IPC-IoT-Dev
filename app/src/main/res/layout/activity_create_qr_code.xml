@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:padding="16dp"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".devicepairing.CreateQrCodeActivity">
     <TextView
         android:layout_width="match_parent"
@@ -13,12 +14,25 @@
         android:text="Create QR Code"
         android:textSize="32dp"/>
 
-    <ImageView
-        android:id="@+id/iv_qrcode"
+    <LinearLayout
+        android:id="@+id/layout_result"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="30dp"
-        android:visibility="gone" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <ImageView
+            android:id="@+id/iv_qrcode"
+            android:layout_width="300dp"
+            android:layout_height="300dp"
+            android:padding="30dp" />
+
+        <Button
+            android:id="@+id/btn_next_step"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="I Heard Sound Beep"/>
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/id_layout_input"
