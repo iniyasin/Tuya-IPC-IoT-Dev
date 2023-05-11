@@ -72,3 +72,10 @@ lint/tmp/
 # App Specific cases
 app/release/output.json
 .idea/codeStyles/
+
+.gradle
+/local.properties
+/.idea/workspace.xml
+/.idea/libraries
+/build
+/captures
