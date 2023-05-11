@@ -79,3 +79,5 @@ app/release/output.json
 /.idea/libraries
 /build
 /captures
+app/release/
+app/debug/
