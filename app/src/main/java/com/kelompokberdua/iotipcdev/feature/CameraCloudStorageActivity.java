@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.Manifest;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -25,16 +26,20 @@ import com.kelompokberdua.iotipcdev.adapter.CameraVideoTimerAdapter;
 import com.thingclips.smart.android.camera.sdk.ThingIPCSdk;
 import com.thingclips.smart.android.camera.sdk.api.IThingIPCCloud;
 import com.thingclips.smart.android.camera.sdk.bean.CloudStatusBean;
+import com.thingclips.smart.api.service.MicroServiceManager;
 import com.thingclips.smart.camera.annotation.CloudPlaySpeed;
 import com.thingclips.smart.camera.camerasdk.thingplayer.callback.AbsP2pCameraListener;
 import com.thingclips.smart.camera.camerasdk.thingplayer.callback.IRegistorIOTCListener;
 import com.thingclips.smart.camera.camerasdk.thingplayer.callback.OperationCallBack;
 import com.thingclips.smart.camera.camerasdk.thingplayer.callback.OperationDelegateCallBack;
+import com.thingclips.smart.camera.cloud.purchase.AbsCameraCloudPurchaseService;
+import com.thingclips.smart.camera.cloud.purchase.AbsCloudCallback;
 import com.thingclips.smart.camera.ipccamerasdk.cloud.IThingCloudCamera;
 import com.thingclips.smart.camera.middleware.cloud.bean.CloudDayBean;
 import com.thingclips.smart.camera.middleware.cloud.bean.TimePieceBean;
 import com.thingclips.smart.camera.middleware.widget.AbsVideoViewCallback;
 import com.thingclips.smart.camera.middleware.widget.ThingCameraView;
+import com.thingclips.smart.home.sdk.ThingHomeSdk;
 import com.thingclips.smart.home.sdk.callback.IThingResultCallback;
 
 import java.io.File;
@@ -50,6 +55,7 @@ public class CameraCloudStorageActivity extends AppCompatActivity {
     private ThingCameraView mVideoView;
     private Toolbar toolbar;
     private String devId;
+    private long homeId;
     private IThingCloudCamera cloudCamera;
     private CameraVideoTimerAdapter timeAdapter;
     private CameraCloudVideoDateAdapter dateAdapter;
@@ -68,6 +74,7 @@ public class CameraCloudStorageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_camera_cloud_storage);
 
         devId = getIntent().getStringExtra(INTENT_DEV_ID);
+        homeId = getIntent().getLongExtra("homeId", 0);
 
         initView();
 
@@ -100,6 +107,7 @@ public class CameraCloudStorageActivity extends AppCompatActivity {
                 public void onSuccess(CloudStatusBean result) {
                     TextView tv = findViewById(R.id.status_tv);
                     tv.setText(getString(R.string.cloud_status) + getServiceStatus(result.getStatus()));
+                    openSubscribe(result.getStatus());
                     if (result.getStatus() == SERVES_EXPIRED || result.getStatus() == SERVES_RUNNING) {
                         findViewById(R.id.query_btn).setVisibility(View.VISIBLE);
                         findViewById(R.id.ll_bottom).setVisibility(View.VISIBLE);
@@ -112,6 +120,13 @@ public class CameraCloudStorageActivity extends AppCompatActivity {
                 }
             });
         }
+
+//        findViewById(R.id.btn_subscribe).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                openSubscribe();
+//            }
+//        });
 
         findViewById(R.id.query_btn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -614,6 +629,24 @@ public class CameraCloudStorageActivity extends AppCompatActivity {
 
                 }
             });
+        }
+    }
+
+    void openSubscribe(int code) {
+        if (code == SERVES_EXPIRED || code == NO_SERVICE) {
+            // Returns service data.
+            AbsCameraCloudPurchaseService cameraCloudService = MicroServiceManager.getInstance().findServiceByInterface(AbsCameraCloudPurchaseService.class.getName());
+            if (cameraCloudService != null) {
+                cameraCloudService.buyCloudStorage(CameraCloudStorageActivity.this,
+                        ThingHomeSdk.getDataInstance().getDeviceBean(devId),
+                        String.valueOf(homeId), new AbsCloudCallback() {
+                            @Override
+                            public void onError(String errorCode, String errorMessage) {
+                                Log.d("ERROR_CLOUD_STORAGE", "ERROR_CODE: "+errorCode+" "+"ERROR_MESSAGE"+errorMessage);
+                                super.onError(errorCode, errorMessage);
+                            }
+                        });
+            }
         }
     }
 }

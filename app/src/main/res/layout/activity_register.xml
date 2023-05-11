@@ -6,74 +6,89 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
+    android:background="@color/white"
     tools:context=".feature.RegisterActivity">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Register"
-        android:textSize="32dp"/>
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layoutTextInputEmail"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:layout_marginTop="16dp">
-        <EditText
-            android:id="@+id/id_email"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_marginTop="16dp"
-            android:inputType="textEmailAddress"
-            android:hint="Email" />
-    </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layoutTextInputPassword"
-        app:passwordToggleEnabled="true"
-        app:passwordToggleDrawable="@drawable/show_password_selector"
-        android:layout_height="wrap_content"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar_view"
+        style="@style/Widget.MaterialComponents.Toolbar.Primary"
         android:layout_width="match_parent"
-        android:layout_marginTop="16dp">
-        <EditText
-            android:id="@+id/id_password"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_marginTop="16dp"
-            android:inputType="textPassword"
-            android:hint="Password"/>
-    </com.google.android.material.textfield.TextInputLayout>
+        android:layout_height="?attr/actionBarSize"
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        app:title="Register Page" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="16dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="@dimen/mg_16">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Register"
+            android:textSize="32dp"/>
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/layoutTextInputVerificationCode"
+            android:id="@+id/layoutTextInputEmail"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
-            android:layout_weight="2">
+            android:layout_marginTop="16dp">
             <EditText
-                android:id="@+id/id_verification_code"
+                android:id="@+id/id_email"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 android:layout_marginTop="16dp"
-                android:layout_marginRight="8dp"
-                android:inputType="text"
-                android:hint="Verification Code"/>
+                android:inputType="textEmailAddress"
+                android:hint="Email" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            android:id="@+id/btn_get_code"
-            android:layout_width="wrap_content"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutTextInputPassword"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleDrawable="@drawable/show_password_selector"
             android:layout_height="wrap_content"
-            android:text="Get Code" />
-    </LinearLayout>
+            android:layout_width="match_parent"
+            android:layout_marginTop="16dp">
+            <EditText
+                android:id="@+id/id_password"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginTop="16dp"
+                android:inputType="textPassword"
+                android:hint="Password"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/btn_register"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Register"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/layoutTextInputVerificationCode"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_weight="2">
+                <EditText
+                    android:id="@+id/id_verification_code"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="8dp"
+                    android:inputType="text"
+                    android:hint="Verification Code"/>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/btn_get_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Get Code" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Register"/>
+    </LinearLayout>
 </LinearLayout>

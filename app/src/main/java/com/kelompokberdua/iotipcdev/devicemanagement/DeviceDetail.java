@@ -32,6 +32,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alibaba.fastjson.JSONObject;
+import com.kelompokberdua.iotipcdev.feature.CameraInfoActivity;
 import com.kelompokberdua.iotipcdev.util.CameraPTZHelper;
 import com.kelompokberdua.iotipcdev.util.Constant;
 import com.kelompokberdua.iotipcdev.util.DPConstants;
@@ -77,6 +78,7 @@ public class DeviceDetail extends AppCompatActivity implements View.OnClickListe
     private int videoClarity = ICameraP2P.HD;
     private String currVideoClarity;
     private String devId;
+    private long homeId;
     private IThingSmartCameraP2P mCameraP2P;
     CameraPTZHelper cameraPTZHelper;
     private boolean reConnect;
@@ -150,6 +152,7 @@ public class DeviceDetail extends AppCompatActivity implements View.OnClickListe
 
     private void initData() {
         devId = getIntent().getStringExtra(INTENT_DEV_ID);
+        homeId = getIntent().getLongExtra("homeId", 0);
         IThingIPCCore cameraInstance = ThingIPCSdk.getCameraInstance();
         if (cameraInstance != null) {
             mCameraP2P = cameraInstance.createCameraP2P(devId);
@@ -656,15 +659,16 @@ public class DeviceDetail extends AppCompatActivity implements View.OnClickListe
             }
             Intent intent2 = new Intent(DeviceDetail.this, CameraCloudStorageActivity.class);
             intent2.putExtra(INTENT_DEV_ID, devId);
+            intent2.putExtra("homeId", homeId);
             startActivity(intent2);
         } else if (id == R.id.message_center_Txt) {
 //            Intent intent3 = new Intent(DeviceDetail.this, AlarmDetectionActivity.class);
 //            intent3.putExtra(INTENT_DEV_ID, devId);
 //            startActivity(intent3);
         } else if (id == R.id.info_Txt) {
-//            Intent intent4 = new Intent(DeviceDetail.this, CameraInfoActivity.class);
-//            intent4.putExtra(INTENT_DEV_ID, devId);
-//            startActivity(intent4);
+            Intent intent4 = new Intent(DeviceDetail.this, CameraInfoActivity.class);
+            intent4.putExtra(INTENT_DEV_ID, devId);
+            startActivity(intent4);
         } else if (id == R.id.get_clarity_Txt) {
 //            if (mCameraP2P != null) {
 //                mCameraP2P.getVideoClarity(new OperationDelegateCallBack() {

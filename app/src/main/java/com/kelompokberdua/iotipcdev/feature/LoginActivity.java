@@ -1,6 +1,7 @@
 package com.kelompokberdua.iotipcdev.feature;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,6 +23,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText emailEdt;
     EditText passwordEdt;
     Button loginBtn;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +35,10 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn = findViewById(R.id.btn_login);
 
         Context context = getBaseContext();
+
+        toolbar = findViewById(R.id.toolbar_view);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override

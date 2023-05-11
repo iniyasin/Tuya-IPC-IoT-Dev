@@ -54,8 +54,26 @@ android {
             pickFirst 'lib/*/libc++_shared.so' // An Android Archive (AAR) file contains an Android library. If the .so file exists in multiple AAR files, select the first AAR file.
             pickFirst 'lib/*/libyuv.so'
             pickFirst 'lib/*/libopenh264.so'
+            pickFirst 'lib/*/libopenh264.so'
+            pickFirst 'lib/*/libv8wrapper.so'
+            pickFirst 'lib/*/libv8android.so'
         }
 
+        lintOptions {
+            abortOnError false
+        }
+
+        compileOptions {
+            sourceCompatibility 1.8
+            targetCompatibility 1.8
+        }
+
+    }
+
+    configurations.all {
+        exclude group:"com.thingclips.smart",module:"thingplugin-annotation"
+        exclude group:"com.thingclips.android.module",module:"thingmodule-annotation"
+        exclude group: "com.thingclips.smart" ,module: 'thingsmart-modularCampAnno'
     }
 
     buildTypes {
@@ -97,6 +115,9 @@ dependencies {
 //    implementation 'com.google.zxing:core:3.2.1'
     implementation 'cn.yipianfengye.android:zxing-library:2.2'
 //    implementation 'com.tuya.smart:tuyasmart:3.26.5'
+
+    //UI BIzBundle
+    api 'com.thingclips.smart:thingsmart-bizbundle-cloud_storage:4.8.0-4'
 
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'

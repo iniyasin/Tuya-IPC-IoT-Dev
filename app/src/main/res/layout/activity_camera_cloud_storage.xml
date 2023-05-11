@@ -36,28 +36,38 @@
 
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/status_tv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/camera_video_view_Rl"
-        android:layout_marginLeft="@dimen/mg_10"
-        android:layout_marginRight="@dimen/mg_10"
-        android:padding="10dp"
-        android:textColor="@color/black"
-        android:textSize="15sp" />
-
     <Button
         android:id="@+id/query_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/status_tv"
+        android:layout_below="@+id/camera_video_view_Rl"
         android:layout_marginLeft="@dimen/mg_10"
         android:layout_marginRight="@dimen/mg_10"
         android:text="@string/query_cloud"
         android:textColor="@color/white"
         android:textSize="15sp"
         android:visibility="gone" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/camera_video_view_Rl"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/status_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/mg_10"
+            android:layout_marginRight="@dimen/mg_10"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:textSize="15sp" />
+        <Button
+            android:id="@+id/btn_subscribe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Subscribe"/>
+    </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/dateRv"

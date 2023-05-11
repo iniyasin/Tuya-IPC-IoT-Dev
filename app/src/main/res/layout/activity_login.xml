@@ -5,47 +5,63 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
     android:orientation="vertical"
+    android:background="@color/white"
     tools:context=".feature.LoginActivity">
-    <TextView
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar_view"
+        style="@style/Widget.MaterialComponents.Toolbar.Primary"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        android:textSize="32dp"/>
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layoutTextInputEmail"
-        android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:layout_marginTop="16dp">
-        <EditText
-            android:id="@+id/id_email"
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent"
-            android:layout_marginTop="16dp"
-            android:inputType="textEmailAddress"
-            android:hint="Email"/>
-    </com.google.android.material.textfield.TextInputLayout>
+        android:layout_height="?attr/actionBarSize"
+        app:navigationIcon="?attr/homeAsUpIndicator"
+        app:title="Login Page" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/layoutTextInputPassword"
-        app:passwordToggleEnabled="true"
-        app:passwordToggleDrawable="@drawable/show_password_selector"
-        android:layout_height="wrap_content"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="16dp">
-        <EditText
-            android:id="@+id/id_password"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/mg_24"
+        android:padding="@dimen/mg_16"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:textSize="32dp"/>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutTextInputEmail"
             android:layout_height="wrap_content"
             android:layout_width="match_parent"
+            android:layout_marginTop="16dp">
+            <EditText
+                android:id="@+id/id_email"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginTop="16dp"
+                android:inputType="textEmailAddress"
+                android:hint="Email"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/layoutTextInputPassword"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleDrawable="@drawable/show_password_selector"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginTop="16dp">
+            <EditText
+                android:id="@+id/id_password"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_marginTop="16dp"
+                android:inputType="textPassword"
+                android:hint="Password"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:inputType="textPassword"
-            android:hint="Password"/>
-    </com.google.android.material.textfield.TextInputLayout>
-    <Button
-        android:id="@+id/btn_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Login"/>
+            android:text="Login" />
+    </LinearLayout>
 </LinearLayout>

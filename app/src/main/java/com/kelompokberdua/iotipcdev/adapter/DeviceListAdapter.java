@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.ViewHolder> {
     public ArrayList<DeviceBean> data = new ArrayList<>();
+    public long homeId;
 
     @Override
     public DeviceListAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -27,6 +28,7 @@ public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.Vi
             // Home Detail
             Intent intent = new Intent(v.getContext(), DeviceDetail.class);
             intent.putExtra(INTENT_DEV_ID, data.get(holder.getAdapterPosition()).devId);
+            intent.putExtra("homeId", homeId);
             v.getContext().startActivity(intent);
         });
         return holder;
@@ -37,6 +39,7 @@ public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.Vi
         DeviceBean deviceBean = data.get(position);
         holder.tvDeviceName.setText(deviceBean.name);
         holder.tvDeviceStatus.setText(deviceBean.getIsOnline().toString());
+//        holder.tvDeviceStatus.setText(deviceBean.getIp());
     }
 
     @Override

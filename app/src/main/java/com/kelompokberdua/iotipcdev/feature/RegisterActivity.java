@@ -1,6 +1,7 @@
 package com.kelompokberdua.iotipcdev.feature;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
 import android.content.Intent;
@@ -25,6 +26,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     Button btnGetVerification;
     Button btnRegister;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +39,10 @@ public class RegisterActivity extends AppCompatActivity {
 
         btnGetVerification = (Button) findViewById(R.id.btn_get_code);
         btnRegister = (Button) findViewById(R.id.btn_register);
+
+        toolbar = findViewById(R.id.toolbar_view);
+        setSupportActionBar(toolbar);
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
         btnGetVerification.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,7 +85,6 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onSuccess(User user) {
                 Toast.makeText(context, "Registered successfully.", Toast.LENGTH_SHORT).show();
-//                Preferences.setIsLoggedUser(context, true);
                 Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
                 startActivity(intent);
             }

@@ -110,6 +110,7 @@ public class HomeDetailActivity extends AppCompatActivity implements View.OnClic
             deviceListView.setAdapter(deviceListAdapter);
 
             deviceListAdapter.data = (ArrayList<DeviceBean>) deviceBeans;
+            deviceListAdapter.homeId = mHomeId;
             deviceListAdapter.notifyDataSetChanged();
         }
     }
