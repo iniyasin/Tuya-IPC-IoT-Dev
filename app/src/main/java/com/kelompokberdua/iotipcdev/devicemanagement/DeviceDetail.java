@@ -30,6 +30,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.fastjson.JSONObject;
 import com.kelompokberdua.iotipcdev.feature.CameraInfoActivity;
@@ -53,6 +54,7 @@ import com.thingclips.smart.camera.middleware.widget.AbsVideoViewCallback;
 import com.thingclips.smart.camera.middleware.widget.ThingCameraView;
 import com.thingclips.smart.home.sdk.ThingHomeSdk;
 import com.thingclips.smart.sdk.api.IResultCallback;
+import com.thingclips.smart.sdk.api.IThingDevActivatorListener;
 import com.thingclips.smart.sdk.api.IThingDevice;
 import com.thingclips.smart.sdk.bean.DeviceBean;
 
@@ -77,7 +79,7 @@ public class DeviceDetail extends AppCompatActivity implements View.OnClickListe
     private int previewMute = ICameraP2P.MUTE;
     private int videoClarity = ICameraP2P.HD;
     private String currVideoClarity;
-    private String devId;
+    private String devId, UUID;
     private long homeId;
     private IThingSmartCameraP2P mCameraP2P;
     CameraPTZHelper cameraPTZHelper;
@@ -152,6 +154,7 @@ public class DeviceDetail extends AppCompatActivity implements View.OnClickListe
 
     private void initData() {
         devId = getIntent().getStringExtra(INTENT_DEV_ID);
+        UUID = getIntent().getStringExtra("UUID");
         homeId = getIntent().getLongExtra("homeId", 0);
         IThingIPCCore cameraInstance = ThingIPCSdk.getCameraInstance();
         if (cameraInstance != null) {
@@ -498,6 +501,7 @@ public class DeviceDetail extends AppCompatActivity implements View.OnClickListe
                 mCameraP2P.connect(devId, new OperationDelegateCallBack() {
                     @Override
                     public void onSuccess(int i, int i1, String s) {
+                        Log.d("Status Connect", s);
                         mHandler.sendMessage(MessageUtil.getMessage(MSG_CONNECT, ARG1_OPERATE_SUCCESS));
                     }
 
@@ -625,6 +629,23 @@ public class DeviceDetail extends AppCompatActivity implements View.OnClickListe
         });
     }
 
+
+
+    void bindingDevice(long homeId, String mUuid) {
+        /** Bind Device */
+        ThingHomeSdk.getActivatorInstance().bindThingLinkDeviceWithQRCode(homeId, mUuid, new IThingDevActivatorListener() {
+            @Override
+            public void onError(String errorCode, String errorMsg) {
+                Toast.makeText(getBaseContext(), "code home detail error: " + errorCode + "error home detail:" + errorMsg, Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onActiveSuccess(DeviceBean devResp) {
+                Toast.makeText(getBaseContext(), "Detail: " + "\nHome: " + devResp.getName() + "\nID: " + devResp.devId, Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
     @Override
     public void onClick(View view) {
         int id = view.getId();
@@ -646,6 +667,7 @@ public class DeviceDetail extends AppCompatActivity implements View.OnClickListe
 //            Intent intent1 = new Intent(DeviceDetail.this, CameraSettingActivity.class);
 //            intent1.putExtra(INTENT_DEV_ID, devId);
 //            startActivity(intent1);
+            bindingDevice(homeId, UUID);
         } else if (id == R.id.cloud_Txt) {
             // 判断设备是否支持云存储
             boolean isSupportCloudStorage = false;

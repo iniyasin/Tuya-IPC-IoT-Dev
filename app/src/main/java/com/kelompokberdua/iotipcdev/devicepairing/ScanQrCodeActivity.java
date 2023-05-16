@@ -19,6 +19,7 @@ import com.thingclips.smart.home.sdk.ThingHomeSdk;
 import com.thingclips.smart.home.sdk.builder.ThingQRCodeActivatorBuilder;
 import com.thingclips.smart.sdk.api.IThingActivator;
 import com.thingclips.smart.sdk.api.IThingDataCallback;
+import com.thingclips.smart.sdk.api.IThingDevActivatorListener;
 import com.thingclips.smart.sdk.api.IThingSmartActivatorListener;
 import com.thingclips.smart.sdk.bean.DeviceBean;
 import com.uuzuche.lib_zxing.activity.CaptureActivity;
@@ -87,9 +88,12 @@ public class ScanQrCodeActivity extends AppCompatActivity {
     private void deviceQrCode(String result) {
         HashMap<String, Object> postData = new HashMap<>();
         postData.put("code", result);
-        ThingHomeSdk.getRequestInstance().requestWithApiNameWithoutSession(
-                "tuya.m.qrcode.parse", "4.0", postData, String.class,
-                new IThingDataCallback<String>() {
+        ThingHomeSdk.getRequestInstance()
+                .requestWithApiNameWithoutSession("tuya.m.qrcode.parse",
+                        "4.0",
+                        postData,
+                        String.class,
+                        new IThingDataCallback<String>() {
                     @Override
                     public void onSuccess(String result) {
                         initQrCode(result);
@@ -114,38 +118,53 @@ public class ScanQrCodeActivity extends AppCompatActivity {
             JSONObject actionObj = obj.optJSONObject("actionData");
             if (null != actionObj) {
                 mUuid = actionObj.optString("uuid");
-                ThingQRCodeActivatorBuilder builder = new ThingQRCodeActivatorBuilder()
-                        .setUuid(mUuid)
-                        .setHomeId(homeId)
-                        .setContext(this)
-                        .setTimeOut(1000)
-                        .setListener(new IThingSmartActivatorListener() {
-                            @Override
-                            public void onError(String errorCode, String errorMsg) {
-                                Toast.makeText(
-                                        ScanQrCodeActivity.this,
-                                        "code: " + errorCode + "error:" + errorMsg,
-                                        Toast.LENGTH_LONG
-                                ).show();
-                            }
+                ThingHomeSdk.getActivatorInstance().bindThingLinkDeviceWithQRCode(homeId, mUuid, new IThingDevActivatorListener() {
+                    @Override
+                    public void onError(String errorCode, String errorMsg) {
+                        Toast.makeText(
+                                ScanQrCodeActivity.this,
+                                "code: " + errorCode + "error:" + errorMsg,
+                                Toast.LENGTH_LONG
+                        ).show();
+                    }
 
-                            @Override
-                            public void onActiveSuccess(DeviceBean devResp) {
-                                Toast.makeText(ScanQrCodeActivity.this, "ActiveSuccess", Toast.LENGTH_LONG).show();
-                            }
-
-                            @Override
-                            public void onStep(String step, Object data) {
-                                Toast.makeText(
-                                        ScanQrCodeActivity.this,
-                                        "step: " + step + "data:" + data.toString(),
-                                        Toast.LENGTH_LONG
-                                ).show();
-                            }
-                        });
-                IThingActivator iTuyaActivator = ThingHomeSdk.getActivatorInstance().newQRCodeDevActivator(builder);
-                iTuyaActivator.start();
-                finish();
+                    @Override
+                    public void onActiveSuccess(DeviceBean devResp) {
+                        Toast.makeText(ScanQrCodeActivity.this, "onActiveSuccess --->>", Toast.LENGTH_LONG).show();
+                    }
+                });
+//                ThingQRCodeActivatorBuilder builder = new ThingQRCodeActivatorBuilder()
+//                        .setUuid(mUuid)
+//                        .setHomeId(homeId)
+//                        .setContext(this)
+//                        .setTimeOut(1000)
+//                        .setListener(new IThingSmartActivatorListener() {
+//                            @Override
+//                            public void onError(String errorCode, String errorMsg) {
+//                                Toast.makeText(
+//                                        ScanQrCodeActivity.this,
+//                                        "code: " + errorCode + "error:" + errorMsg,
+//                                        Toast.LENGTH_LONG
+//                                ).show();
+//                            }
+//
+//                            @Override
+//                            public void onActiveSuccess(DeviceBean devResp) {
+//                                Toast.makeText(ScanQrCodeActivity.this, "ActiveSuccess", Toast.LENGTH_LONG).show();
+//                            }
+//
+//                            @Override
+//                            public void onStep(String step, Object data) {
+//                                Toast.makeText(
+//                                        ScanQrCodeActivity.this,
+//                                        "step: " + step + "data:" + data.toString(),
+//                                        Toast.LENGTH_LONG
+//                                ).show();
+//                            }
+//                        });
+//                IThingActivator iTuyaActivator = ThingHomeSdk.getActivatorInstance().newQRCodeDevActivator(builder);
+//                iTuyaActivator.start();
+//                finish();
             }
         } catch (JSONException e) {
             e.printStackTrace();

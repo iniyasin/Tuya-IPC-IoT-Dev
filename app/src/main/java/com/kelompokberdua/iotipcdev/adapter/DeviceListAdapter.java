@@ -28,6 +28,7 @@ public class DeviceListAdapter extends RecyclerView.Adapter<DeviceListAdapter.Vi
             // Home Detail
             Intent intent = new Intent(v.getContext(), DeviceDetail.class);
             intent.putExtra(INTENT_DEV_ID, data.get(holder.getAdapterPosition()).devId);
+            intent.putExtra("UUID", data.get(holder.getAdapterPosition()).uuid);
             intent.putExtra("homeId", homeId);
             v.getContext().startActivity(intent);
         });

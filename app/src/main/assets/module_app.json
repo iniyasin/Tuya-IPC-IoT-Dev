@@ -572,9 +572,7 @@
     "com.thingclips.smart.webcontainer_api.WebContainerService": "com.thingclips.smart.jsbridge.WebContainerServiceImpl",
     "com.thingclips.smart.panelcaller.api.AbsPanelCallerService": "com.thingclips.smart.panelcaller.PanelCallerServiceImpl",
     "com.thingclips.smart.ipc.panel.api.AbsCameraStateService": "com.thingclips.smart.ipc.camera.rnpanel.service.CameraStateServiceImpl",
-    "com.thingclips.smart.multimedia.qrcode.api.ScanQRCodeService": "com.thingclips.smart.mlkit.qrcode.ScanQRCodeServiceImpl",
-    "com.tuya.smart.jsbridge.base.webview.WebViewActivity": "com.thingclips.smart.jsbridge.base.webview.WebViewActivity",
-    "com.tuya.smart.jsbridge.base.webview.WebViewFragment": "com.thingclips.smart.jsbridge.base.webview.WebViewFragment"
+    "com.thingclips.smart.multimedia.qrcode.api.ScanQRCodeService": "com.thingclips.smart.mlkit.qrcode.ScanQRCodeServiceImpl"
   },
   "eventMap": {
     "global_clear_event": [

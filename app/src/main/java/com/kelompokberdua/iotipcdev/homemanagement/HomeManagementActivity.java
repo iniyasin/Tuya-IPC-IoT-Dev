@@ -13,12 +13,15 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.kelompokberdua.iotipcdev.R;
+import com.thingclips.smart.android.user.bean.User;
 import com.thingclips.smart.home.sdk.ThingHomeSdk;
 import com.thingclips.smart.home.sdk.bean.HomeBean;
 import com.thingclips.smart.home.sdk.bean.WeatherBean;
 import com.thingclips.smart.home.sdk.callback.IIGetHomeWetherSketchCallBack;
 import com.thingclips.smart.home.sdk.callback.IThingGetHomeListCallback;
 import com.thingclips.smart.home.sdk.callback.IThingHomeResultCallback;
+import com.thingclips.smart.sdk.api.IThingDevActivatorListener;
+import com.thingclips.smart.sdk.bean.DeviceBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +36,11 @@ public class HomeManagementActivity extends AppCompatActivity implements View.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_management);
 
+        User user = ThingHomeSdk.getUserInstance().getUser();
+        if (user != null) {
+          Log.d("UID", user.getUid());
+        }
+
         btnNewHome = findViewById(R.id.btn_new_home);
         btnListHome = findViewById(R.id.btn_list_home);
         btnCurrentHome = findViewById(R.id.btn_current_home);
@@ -40,6 +48,7 @@ public class HomeManagementActivity extends AppCompatActivity implements View.On
         btnNewHome.setOnClickListener(this);
         btnListHome.setOnClickListener(this);
         btnCurrentHome.setOnClickListener(this);
+
     }
 
     @Override

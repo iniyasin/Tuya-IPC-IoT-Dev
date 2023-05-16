@@ -21,6 +21,7 @@ import com.thingclips.smart.home.sdk.bean.HomeBean;
 import com.thingclips.smart.home.sdk.bean.WeatherBean;
 import com.thingclips.smart.home.sdk.callback.IIGetHomeWetherSketchCallBack;
 import com.thingclips.smart.home.sdk.callback.IThingHomeResultCallback;
+import com.thingclips.smart.sdk.api.IThingDevActivatorListener;
 import com.thingclips.smart.sdk.bean.DeviceBean;
 
 import java.util.ArrayList;
@@ -33,6 +34,7 @@ public class HomeDetailActivity extends AppCompatActivity implements View.OnClic
 
     DeviceListAdapter deviceListAdapter;
     private long mHomeId;
+    private String mUuid;
 
 
     @Override

@@ -118,6 +118,13 @@ dependencies {
 
     //UI BIzBundle
     api 'com.thingclips.smart:thingsmart-bizbundle-cloud_storage:4.8.0-4'
+    api 'com.thingclips.smart:thingsmart-ipcsdk:5.0.0'
+    implementation 'com.thingclips.smart:thingsmart-bizbundle-camera:4.8.0-4'
+    implementation 'com.alibaba:fastjson:1.1.67.android'
+    implementation 'com.squareup.okhttp3:okhttp-urlconnection:3.14.9'
+
+    // The latest stable App SDK for Android.
+    implementation "com.thingclips.smart:thingsmart:5.0.1"
 
     implementation 'androidx.core:core-ktx:1.8.0'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
